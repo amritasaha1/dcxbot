@@ -32,10 +32,11 @@ public class DialogAction {
      * @param type
      * @param message
      */
-    public DialogAction(String type,Message message) {
+    public DialogAction(String type,Message message, ResponseCard responseCard) {
 
         this.type = type;
         this.message = message;
+        this.responseCard = responseCard;
     }
     
     /**

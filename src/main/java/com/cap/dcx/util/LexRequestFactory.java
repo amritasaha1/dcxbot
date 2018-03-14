@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.cap.dcx.beans.LexRequest;
+import com.cap.dcx.beans.LexRequestAttribute;
+import com.cap.dcx.beans.UserIdType;
 
 import static org.apache.http.util.TextUtils.isEmpty;
 
@@ -13,6 +15,9 @@ import static org.apache.http.util.TextUtils.isEmpty;
  *
  */
 public class LexRequestFactory {
+	
+	private final static String FACEBOOK_ID_PATTERN = "^\\d{16}$";
+	
     public static LexRequest createLexRequest(Map<String, Object> input) {
         Map<String,Object> botMap = (Map<String,Object>) input.get("bot");
         String botName = (String) botMap.get("name");
@@ -34,6 +39,32 @@ public class LexRequestFactory {
         lexRequest.setScore((String)input.get("usercardintent"));
         lexRequest.setScore((String)input.get("filltypeintent"));
         lexRequest.setScore((String)input.get("thanks"));
+        //loadUserId(input,lexRequest);
         return lexRequest;
+    }
+    
+;
+    
+    /**
+     * 
+     * @param input
+     * @param request
+     */
+    private static void loadUserId(Map<String, Object> input, LexRequest request) {
+        String userId = (String) input.get(LexRequestAttribute.UserId);
+        System.out.println("userId -- " + userId);
+        request.setUserId(userId);
+        if(isEmpty(userId))
+            request.setUserIdType(UserIdType.Undefined);
+        else {
+            if(userId.matches(FACEBOOK_ID_PATTERN)) {
+            	 request.setUserId("FB Type");
+            	 request.setUserIdType(UserIdType.Facebook);
+            }else {
+            	request.setUserIdType(UserIdType.Undefined);
+            }
+               
+           
+        }
     }
 }

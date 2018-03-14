@@ -1,5 +1,6 @@
 package com.cap.dcx.chatbot;
 
+import java.awt.im.InputContext;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -19,8 +20,13 @@ import com.cap.dcx.beans.LexResponse;
 import com.cap.dcx.beans.Message;
 import com.cap.dcx.beans.ResponseCard;
 import com.cap.dcx.beans.Slots;
+import com.cap.dcx.repositories.RepositoryFactory;
+import com.cap.dcx.repositories.RepositoryFactoryImpl;
 import com.cap.dcx.service.BasicAuthRestTemplate;
+import com.cap.dcx.service.UserService;
+import com.cap.dcx.service.UserServiceImpl;
 import com.cap.dcx.util.LexRequestFactory;
+import java.util.logging.Logger;
 
 /**
  * The main Lambda Class with the handleRequest method
@@ -28,21 +34,28 @@ import com.cap.dcx.util.LexRequestFactory;
  *
  */
 public class getCreditCardHandler implements RequestHandler<Map<String, Object>, Object> {
-
+	
+    private RepositoryFactory repositoryFactory;
+ 
     @Override
     public Object handleRequest(Map<String,Object> input, Context context) {
+        repositoryFactory = new RepositoryFactoryImpl();
+        UserServiceImpl userService = new UserServiceImpl(repositoryFactory.createUserRepository());
+        System.out.println("inside handleRequest --- ");
         context.getLogger().log("Input: " + input);
         LexRequest lexRequest = (LexRequest) LexRequestFactory.createLexRequest(input);
         DialogAction dialogAction;   
         //service call
         LambdaLogger logger = context.getLogger();
+        String firstName = lexRequest.getFirstName();
+        System.out.println("firstName --- "+firstName);
         String responseToLex = callAEMServicefor(lexRequest.getBotName(), logger);
         String responseToLexMsg = "Great! Here are some good options for you -"+responseToLex+ "; What type of card would you like to choose?";
         ResponseCard responseCard = processResponse(responseToLex);
         Message message = new Message("PlainText",responseToLexMsg);
         Slots slots = new Slots("null","null","null","null","null","null","null");
         if (lexRequest.getUsercardintent() == null) {
-        dialogAction = new DialogAction("ElicitIntent",message);
+        dialogAction = new DialogAction("ElicitIntent",message,responseCard);
         //dialogAction = new DialogAction("ElicitSlot",message,"CreditIntent",responseCard, slots,"usercardintent");
         //responseToLex = "Great! Here are some good options for you -"+responseToLex;
         //DialogAction dialogAction = new DialogAction("Close","Fulfilled",new Message("PlainText",responseToLex));
@@ -68,7 +81,7 @@ public class getCreditCardHandler implements RequestHandler<Map<String, Object>,
 		for (int i = 0; i < cards.length; i++) {
 			System.out.println("card from AEMS Array --- ");
 			System.out.println(cards[i]);
-			button = new Button(cards[i], cards[i]);
+			button = new Button(cards[i], "I want "+cards[i]);
 			buttonArray[i] = button;
 		}
 		System.out.println("buttonArray --- ");

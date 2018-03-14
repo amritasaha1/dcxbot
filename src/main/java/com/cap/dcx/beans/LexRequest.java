@@ -1,5 +1,8 @@
 package com.cap.dcx.beans;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 /**
  * The model class for LexRequest object
  * @author amrisaha
@@ -16,9 +19,65 @@ public class LexRequest {
 	private String thanks;
 	private String filltypeintent;
 	private String usercardintent;
+	//private InvocationSource invocationSource = InvocationSource.FulfillmentCodeHook;
+	//private OutputDialogMode outputDialogMode = OutputDialogMode.Text;
+	private String error;
+	private String firstName;
+	private String lastName;
+	private String address;
+	private Map<String, Object> sessionAttributes = new LinkedHashMap<>();
+	private String userId;
+	private String inputTranscript;
+	private UserIdType userIdType;
 	
-	
-    
+	public String getError() {
+		return error;
+	}
+	public void setError(String error) {
+		this.error = error;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public Map<String, Object> getSessionAttributes() {
+		return sessionAttributes;
+	}
+	public void setSessionAttributes(Map<String, Object> sessionAttributes) {
+		this.sessionAttributes = sessionAttributes;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getInputTranscript() {
+		return inputTranscript;
+	}
+	public void setInputTranscript(String inputTranscript) {
+		this.inputTranscript = inputTranscript;
+	}
+	public UserIdType getUserIdType() {
+		return userIdType;
+	}
+	public void setUserIdType(UserIdType userIdType) {
+		this.userIdType = userIdType;
+	}
 	public String getThanks() {
 		return thanks;
 	}
