@@ -1,5 +1,10 @@
 package com.cap.dcx.beans;
 
+/**
+ * The model class for Response Card
+ * @author amrisaha
+ *
+ */
 public class ResponseCard {
 	
     private Attachment[] genericAttachments;

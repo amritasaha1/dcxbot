@@ -9,6 +9,11 @@ import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
 
+/**
+ * 
+ * @author Venkata
+ *
+ */
 public class BasicAuthInterceptor implements ClientHttpRequestInterceptor {
 
     private String username;

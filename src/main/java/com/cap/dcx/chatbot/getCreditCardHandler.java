@@ -22,6 +22,11 @@ import com.cap.dcx.beans.Slots;
 import com.cap.dcx.service.BasicAuthRestTemplate;
 import com.cap.dcx.util.LexRequestFactory;
 
+/**
+ * The main Lambda Class with the handleRequest method
+ * @author amrisaha
+ *
+ */
 public class getCreditCardHandler implements RequestHandler<Map<String, Object>, Object> {
 
     @Override
@@ -47,6 +52,11 @@ public class getCreditCardHandler implements RequestHandler<Map<String, Object>,
         return new LexResponse(dialogAction);
     }
     
+    /**
+     * This method processes the response from AEM and builds Response card
+     * @param responseFrmAEM
+     * @return responseCard
+     */
     private ResponseCard processResponse(String responseFrmAEM) {
 
 		String[] cards = responseFrmAEM.split(",");
@@ -73,6 +83,12 @@ public class getCreditCardHandler implements RequestHandler<Map<String, Object>,
 
 	}
 
+    /**
+     * This method performs the service call to AEM rest Service
+     * @param userInput
+     * @param logger
+     * @return
+     */
 	private String callAEMServicefor(String userInput, LambdaLogger logger) {
 		System.out.println("You are here in service called method.....");
 		String serviceresponse = "This is mock service response....";
@@ -80,7 +96,7 @@ public class getCreditCardHandler implements RequestHandler<Map<String, Object>,
 		ResponseEntity<String> jsonresult = restTemplate
 				.getForEntity("http://54.195.246.137/bin/trainingServlet?query=cards", String.class);
 		JSONObject jsonAEMResponse = new JSONObject(jsonresult);
-		// logger.log("Full response details:: " + jsonAEMResponse.toString());
+		//logger.log("Full response details:: " + jsonAEMResponse.toString());
 		String responseBody = (String) jsonAEMResponse.get("body");
 		JSONObject responseJSON = new JSONObject(responseBody);
 		serviceresponse = responseJSON.toString();

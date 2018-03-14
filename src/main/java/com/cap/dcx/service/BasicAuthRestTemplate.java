@@ -8,6 +8,11 @@ import org.springframework.http.client.InterceptingClientHttpRequestFactory;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * 
+ * @author Venkata
+ *
+ */
 public class BasicAuthRestTemplate extends RestTemplate {
 
     private String username;

@@ -1,5 +1,10 @@
 package com.cap.dcx.beans;
 
+/**
+ * Model class for all slots in the BOT
+ * @author amrisaha
+ *
+ */
 public class Slots {
 	
 	private String usercardintent;

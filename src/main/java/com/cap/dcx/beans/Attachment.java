@@ -1,11 +1,23 @@
 package com.cap.dcx.beans;
 
+/**
+ * 
+ * @author amrisaha
+ * Model class for Attachment Object in Response Card
+ *
+ */
 public class Attachment {
 	
     private Button[] buttons;
     private String subTitle;
     private String title;
     
+    /**
+     * Constructor 
+     * @param buttons
+     * @param subTitle
+     * @param title
+     */
 	public Attachment(Button[] buttons, String subTitle, String title) {
 		this.buttons = buttons;
 		this.subTitle = subTitle;

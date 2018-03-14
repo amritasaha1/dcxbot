@@ -7,6 +7,11 @@ import com.cap.dcx.beans.LexRequest;
 
 import static org.apache.http.util.TextUtils.isEmpty;
 
+/**
+ * This class processes the user input and builds up LexRequest Class
+ * @author amrisaha
+ *
+ */
 public class LexRequestFactory {
     public static LexRequest createLexRequest(Map<String, Object> input) {
         Map<String,Object> botMap = (Map<String,Object>) input.get("bot");

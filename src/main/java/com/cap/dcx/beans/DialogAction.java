@@ -1,5 +1,11 @@
 package com.cap.dcx.beans;
 
+/**
+ * 
+ * @author amrisaha
+ * The model class for DialogAction object
+ *
+ */
 public class DialogAction {
     private String type;
     private String fulfillmentState;
@@ -21,12 +27,23 @@ public class DialogAction {
         public static final String Failed = "Failed";
     }
     
+    /**
+     * Constructor 1
+     * @param type
+     * @param message
+     */
     public DialogAction(String type,Message message) {
 
         this.type = type;
         this.message = message;
     }
     
+    /**
+     * Constructor 2
+     * @param type
+     * @param fulfillmentState
+     * @param message
+     */
     public DialogAction(String type,String fulfillmentState,Message message) {
 
         this.type = type;
@@ -34,6 +51,15 @@ public class DialogAction {
         this.message = message;
     }
 
+    /**
+     * Constructor 3
+     * @param type
+     * @param message
+     * @param intentName
+     * @param responseCard
+     * @param slots
+     * @param slotToElicit
+     */
     public DialogAction(String type,Message message,String intentName,ResponseCard responseCard ,Slots slots, String slotToElicit) {
 
         this.type = type;

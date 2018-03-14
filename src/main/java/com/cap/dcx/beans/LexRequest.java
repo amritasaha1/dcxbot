@@ -1,5 +1,10 @@
 package com.cap.dcx.beans;
 
+/**
+ * The model class for LexRequest object
+ * @author amrisaha
+ *
+ */
 public class LexRequest {
 	
     private String botName;
